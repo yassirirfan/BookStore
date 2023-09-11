@@ -7,11 +7,15 @@ const app = express();
 
 app.use(express.json())
 
-function Validate (req) { 
+function Validate(req) { 
     if (!req.body.title || !req.body.author || !req.body.publishYear){
         return false
     }
     return true
+}
+
+function ResultMessage(res, action){
+    return !res ? {message: "Book not found"} : { message: `Book ${action} successfully`}
 }
 
 const validationMessage = {
@@ -45,7 +49,9 @@ app.get('/books', async (request, response) => {
             data: books
         })
     }catch (error){
-        response.status(500).send({'Error': error.message})
+        response.status(500).json({
+            Error: error.message
+        })
     }
 })
 
@@ -56,7 +62,9 @@ app.get('/books/:id', async (request, response) => {
         const book = await Book.findById(id);
         return response.status(200).json(book)
     }catch (error){
-        response.status(500).send({'Error': error.message})
+        response.status(500).json({
+            Error : error.message
+        })
     }
 })
 
@@ -68,14 +76,24 @@ app.put('/books/:id', async (request, response) => {
         }
         const { id } = request.params
         const result = await Book.findByIdAndUpdate(id, request.body)
-        
-        if(!result){
-            return response.status(404).json({message: "Book not found"})
-        }
-        return response.status(200).json({message: 'Book updated successfully'})
-
+        return response.status(200).send(ResultMessage(result, 'Updated'))
     }catch (error){
-        response.status(500).send({'Error': error.message})
+        response.status(500).json({
+            'Error': error.message
+        })
+    }
+})
+
+// Delete a specific book
+app.delete('/books/:id', async (request, response) => {
+    try{
+        const { id } = request.params
+        const result = await Book.findByIdAndDelete(id)
+        return response.status(200).send(ResultMessage(result, 'Deleted'))
+    }catch (error){
+        response.status(500).json({
+            'Error': error.message
+        })
     }
 })
 
