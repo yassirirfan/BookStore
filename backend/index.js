@@ -39,10 +39,24 @@ app.post('/books', async(request, response) => {
 app.get('/books', async (request, response) => {
     try{
         const books = await Book.find({});
-        return response.status(200).send({
+        return response.status(200).json({
             count: books.length,
             data: books
         })
+    }catch (error){
+        console.log(error.message);
+        response.status(500).send({'Error': error.message})
+    }
+})
+
+// Route a specific book
+app.get('/books/:id', async (request, response) => {
+    try{
+        console.log(request.params)
+        const { id } = request.params
+        console.log(id)
+        const book = await Book.findById(id);
+        return response.status(200).json(book)
     }catch (error){
         console.log(error.message);
         response.status(500).send({'Error': error.message})
