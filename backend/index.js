@@ -5,7 +5,18 @@ import booksRoute from "./routes/booksRoute.js";
 
 const app = express();
 
+// Middleware for parsing request body
 app.use(express.json())
+
+// Middleware for handling CORS Policy
+// Allow all origins
+// app.use(cors());
+// Allow custom origins
+app.use(cors({
+    origin:'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+}));
 
 app.get('/', (request, response) => {
     console.log(request);
