@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -5,12 +6,14 @@ import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
 
 function UpdateBook() {
+
   const [author, setAuthor] = useState('')
   const [title, setTitle] = useState('')
   const [publishYear, setPublishYear] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
   const {id} = useParams();
+
   useEffect(() => {
     setLoading(true);
     axios.get(`http://localhost:5555/books/${id}`)
@@ -25,6 +28,7 @@ function UpdateBook() {
       console.log(error)
     })
   }, [])
+
   const handleUpdateBook = () => {
     const data = {
       title,
@@ -42,8 +46,8 @@ function UpdateBook() {
       alert('An error occured, Please check console.')
       console.log(error)
     })
-
   }
+
   return (
     <div className='p-4'>
       <BackButton />

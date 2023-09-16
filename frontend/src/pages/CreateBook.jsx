@@ -5,11 +5,13 @@ import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
 
 function CreateBook() {
+
   const [author, setAuthor] = useState('')
   const [title, setTitle] = useState('')
   const [publishYear, setPublishYear] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
+
   const handleSaveBook = () => {
     const data = {
       title,
@@ -27,8 +29,8 @@ function CreateBook() {
       alert('An error occured, Please check console.')
       console.log(error)
     })
-
   }
+  
   return (
     <div className='p-4'>
       <BackButton />

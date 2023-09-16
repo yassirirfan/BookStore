@@ -7,8 +7,10 @@ import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 
 function Home() {
+
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -22,6 +24,7 @@ function Home() {
         setLoading(false);
       });
   }, []);
+  
   return (
     <div className="p-4">
       <div className="flex justify-between items-center">
