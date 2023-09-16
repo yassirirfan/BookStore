@@ -5,9 +5,11 @@ import BackButton from '../components/BackButton'
 import Spinner from '../components/Spinner'
 
 function ShowBook() {
+  
   const [book, setBook] = useState({})
   const [loading, setLoading] = useState(true)
   const {id} = useParams();
+
   useEffect( () => {
     axios
     .get(`http://localhost:5555/books/${id}`)
@@ -20,6 +22,7 @@ function ShowBook() {
       console.log(error);
     })
   }, [])
+
   return (
     <div className='p-4'>
       <BackButton />
