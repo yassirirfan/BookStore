@@ -59,6 +59,7 @@ function CreateBook() {
               value={publishYear} 
               onChange={(e) => setPublishYear(e.target.value)}/>
         </div>
+        <button className='p-2 bg-sky-300 m-8' onClick={handleSaveBook}>Save</button>
       </div>
     </div>
   )
