@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import booksRoute from "./routes/booksRoute.js";
 import cors from 'cors';
 
-const MONGO_URL = "mongodb+srv://root:root@bookstore.s9aj3hl.mongodb.net/books-collection?retryWrites=true&w=majority";
+const MONGO_URL = "mongodb+srv://<username>:<password>@bookstore.s9aj3hl.mongodb.net/<collection>?retryWrites=true&w=majority";
 const PORT = 5555
 const app = express();
 
