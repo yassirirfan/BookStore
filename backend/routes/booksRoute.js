@@ -18,7 +18,7 @@ const validationMessage = {
     message: 'Send all required fields: title, author, publish year',
 };
 
-// Route to create a Book
+// Route for book creation
 router.post('/', async(request, response) => {
     try{
         if(!Validate(request)){
